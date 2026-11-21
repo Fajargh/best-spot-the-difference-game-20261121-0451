@@ -1,0 +1,362 @@
+/* Kopi Senja Lane — Spot the Difference. Styles for the whole game frame. */
+
+:root {
+  --ink: #2b2118;
+  --paper: #fff6e8;
+  --panel: #fffdf7;
+  --accent: #c2571b;
+  --accent-soft: #f2a65a;
+  --teal: #14655a;
+  --gold: #f6c453;
+  --danger: #c0392b;
+  --shadow: 0 10px 30px rgba(43, 33, 24, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #ffe9c4 0%, #ffd9a0 55%, #f7b267 100%);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#app {
+  width: min(1280px, 100vw);
+  padding: 10px 14px 22px;
+}
+
+header.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 6px 10px;
+}
+
+h1.game-title {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+h1.game-title .lane {
+  color: var(--accent);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #6b4a2f;
+  font-style: italic;
+}
+
+/* ---- HUD ---- */
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border: 2px solid #e8cfa8;
+  border-radius: 14px;
+  padding: 8px 12px;
+  box-shadow: var(--shadow);
+}
+
+.chip {
+  background: #fdf1dc;
+  border: 1.5px solid #e8cfa8;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chip .label {
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #8a6a45;
+  margin-right: 5px;
+}
+
+#timer-chip.low { background: #fde3df; border-color: #e89a90; color: var(--danger); }
+
+#timer-bar-wrap {
+  flex: 1 1 160px;
+  height: 12px;
+  background: #f0e2c8;
+  border-radius: 999px;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+#timer-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--teal), #2e9e7a);
+  border-radius: 999px;
+  transition: width 0.5s linear;
+}
+
+#timer-bar.low { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+
+button.hud-btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--teal);
+  background: var(--teal);
+  color: #fff;
+  cursor: pointer;
+}
+
+button.hud-btn:hover { filter: brightness(1.12); }
+button.hud-btn:disabled { opacity: 0.45; cursor: default; }
+
+button.hud-btn.ghost {
+  background: transparent;
+  color: var(--teal);
+}
+
+#level-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 10px 2px 0;
+}
+
+.level-tab {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px 999px 0 0;
+  border: 2px solid #e8cfa8;
+  border-bottom: none;
+  background: #fbeed3;
+  color: #8a6a45;
+  cursor: pointer;
+}
+
+.level-tab.active {
+  background: var(--panel);
+  color: var(--ink);
+  border-color: #e8cfa8;
+}
+
+.level-tab.done { color: var(--teal); }
+.level-tab:disabled { opacity: 0.55; cursor: default; }
+
+/* ---- Panels ---- */
+
+#stage {
+  background: var(--panel);
+  border: 2px solid #e8cfa8;
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  padding: 12px 12px 6px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+#panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel {
+  position: relative;
+  border: 3px solid #d9b98a;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffe9c4;
+  cursor: crosshair;
+}
+
+.panel svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.panel-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(43, 33, 24, 0.82);
+  color: #ffe9c4;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.panel.shake { animation: shake 0.3s; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+.found-ring {
+  animation: pop 0.35s ease-out;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hint-ring { animation: hint-pulse 0.9s ease-in-out infinite; }
+
+.miss-mark {
+  animation: pop 0.25s ease-out;
+  pointer-events: none;
+}
+
+/* ---- Message line + footer ---- */
+
+#message {
+  min-height: 26px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--teal);
+  padding-top: 8px;
+}
+
+#message.bad { color: var(--danger); }
+
+#progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding: 4px 0 8px;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid #c9a06a;
+  background: transparent;
+}
+
+.dot.found {
+  background: var(--gold);
+  border-color: #b8860b;
+}
+
+footer.foot {
+  text-align: center;
+  font-size: 12px;
+  color: #6b4a2f;
+  padding: 6px 0 0;
+}
+
+footer.foot kbd {
+  background: #fff;
+  border: 1px solid #d9b98a;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-family: inherit;
+}
+
+/* ---- Overlay screens ---- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(43, 33, 24, 0.55);
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+
+.overlay.hidden { display: none; }
+
+.card {
+  background: var(--paper);
+  border-radius: 18px;
+  border: 2px solid #e8cfa8;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  padding: 26px 32px;
+  max-width: 560px;
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.card p {
+  margin: 8px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.card .big-score {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--teal);
+  margin: 6px 0;
+}
+
+.card button {
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 11px 26px;
+  margin-top: 12px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.card button:hover { filter: brightness(1.12); }
+
+.card .diff-list {
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 10px auto 0;
+  display: inline-block;
+}
+
+@media (max-width: 760px) {
+  #panels { grid-template-columns: 1fr; }
+  h1.game-title { font-size: 22px; }
+}

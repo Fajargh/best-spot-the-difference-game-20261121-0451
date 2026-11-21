@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kopi Senja Lane — Spot the Difference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <h1 class="game-title">Kopi Senja Lane <span class="lane">— Spot the Difference</span></h1>
+    <div class="subtitle">Two pictures, one street. Find what changed.</div>
+  </header>
+
+  <div id="hud">
+    <span class="chip"><span class="label">Found</span><span id="found-count">0</span> / <span id="total-count">7</span></span>
+    <span class="chip"><span class="label">Left</span><span id="left-count">7</span></span>
+    <span class="chip"><span class="label">Score</span><span id="score">0</span></span>
+    <span class="chip" id="timer-chip"><span class="label">Time</span><span id="timer">2:30</span></span>
+    <div id="timer-bar-wrap"><div id="timer-bar"></div></div>
+    <button class="hud-btn" id="hint-btn" type="button">Hint (3)</button>
+    <button class="hud-btn ghost" id="restart-btn" type="button">Restart</button>
+  </div>
+
+  <div id="level-tabs" role="tablist" aria-label="Levels"></div>
+
+  <div id="stage">
+    <div id="panels">
+      <div class="panel" id="panel-left">
+        <span class="panel-tag">A &middot; Original</span>
+        <div id="scene-left"></div>
+      </div>
+      <div class="panel" id="panel-right">
+        <span class="panel-tag">B &middot; Changed</span>
+        <div id="scene-right"></div>
+      </div>
+    </div>
+    <div id="message" aria-live="polite"></div>
+    <div id="progress-dots"></div>
+
+    <div class="overlay" id="overlay">
+      <div class="card" id="overlay-card"></div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    Click a difference on either picture &middot; <kbd>H</kbd> hint &middot; <kbd>R</kbd> restart &middot;
+    Wrong clicks cost 25 points &middot; Original art, drawn in code for this game.
+  </footer>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
